@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bangalore PG Finder</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f8fc;
+            color: #222;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: white;
+
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            min-height: 480px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 70px 7%;
+
+            background:
+                linear-gradient(
+                    rgba(20, 20, 40, 0.65),
+                    rgba(20, 20, 40, 0.65)
+                ),
+                url("https://images.unsplash.com/photo-1560185008-b033106af5c3?auto=format&fit=crop&w=1600&q=80");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+        }
+
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+
+        .small-title {
+            font-size: 14px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+
+        .hero h1 {
+            font-size: 60px;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+
+        .hero-text {
+            font-size: 19px;
+            margin-bottom: 30px;
+        }
+
+
+        /* SEARCH */
+
+        .search-box {
+            display: flex;
+
+            max-width: 650px;
+
+            background: white;
+
+            padding: 8px;
+
+            border-radius: 12px;
+        }
+
+
+        .search-box input {
+            flex: 1;
+
+            border: none;
+
+            outline: none;
+
+            padding: 15px;
+
+            font-size: 16px;
+        }
+
+
+        .search-box button {
+            border: none;
+
+            padding: 0 25px;
+
+            border-radius: 8px;
+
+            background: #6c5ce7;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+
+        .search-box button:hover {
+            background: #5848d5;
+        }
+
+
+        /* FILTERS */
+
+        .filters-section {
+            padding: 25px 7%;
+
+            background: white;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+
+        .filters {
+            display: flex;
+            gap: 15px;
+
+            max-width: 1200px;
+
+            margin: auto;
+        }
+
+
+        .filters select {
+            padding: 13px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 8px;
+
+            background: white;
+
+            font-size: 15px;
+        }
+
+
+        /* MAIN */
+
+        main {
+            padding: 70px 7%;
+        }
+
+
+        .section-heading {
+            margin-bottom: 35px;
+        }
+
+
+        .section-heading p {
+            color: #6c5ce7;
+
+            font-size: 13px;
+
+            letter-spacing: 3px;
+
+            font-weight: bold;
+        }
+
+
+        .section-heading h2 {
+            font-size: 35px;
+
+            margin-top: 8px;
+        }
+
+
+        /* PG GRID */
+
+        .pg-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        /* PG CARD */
+
+        .pg-card {
+            background: white;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.08);
+
+            transition: 0.3s;
+        }
+
+
+        .pg-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.12);
+        }
+
+
+        .pg-image {
+            width: 100%;
+
+            height: 220px;
+
+            object-fit: cover;
+        }
+
+
+        .pg-content {
+            padding: 20px;
+        }
+
+
+        .pg-name {
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .location {
+            color: #777;
+
+            margin-bottom: 15px;
+        }
+
+
+        .price {
+            font-size: 23px;
+
+            font-weight: bold;
+
+            color: #6c5ce7;
+        }
+
+
+        .advance {
+            color: #666;
+
+            margin: 5px 0 15px;
+        }
+
+
+        .tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .tag {
+            background: #f0efff;
+
+            color: #5b4bd8;
+
+            padding: 6px 9px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+        }
+
+
+        .details-btn {
+            width: 100%;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #222;
+
+            color: white;
+
+            cursor: pointer;
+        }
+
+
+        .details-btn:hover {
+            background: #444;
+        }
+
+
+        /* ABOUT */
+
+        .about {
+            padding: 70px 7%;
+
+            text-align: center;
+
+            background: white;
+        }
+
+
+        .about h2 {
+            font-size: 32px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .about p {
+            color: #666;
+
+            max-width: 600px;
+
+            margin: auto;
+
+            line-height: 1.7;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            background: #181818;
+
+            color: white;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            .pg-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .nav-links {
+                display: none;
+            }
+
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+
+            .search-box {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+
+            .search-box button {
+                padding: 14px;
+            }
+
+
+            .filters {
+                flex-direction: column;
+            }
+
+
+            .pg-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🏠 Bangalore PG Finder
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="#">
+                Home
+            </a>
+
+            <a href="#pgs">
+                PGs
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="small-title">
+                FIND YOUR PERFECT STAY
+            </p>
+
+
+            <h1>
+                Find the Best PGs
+                <br>
+                in Bangalore
+            </h1>
+
+
+            <p class="hero-text">
+                Search PGs by location, rent, room type and amenities.
+            </p>
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="locationSearch"
+                    placeholder="Search location e.g. Whitefield, HSR..."
+                >
+
+
+                <button onclick="searchPGs()">
+                    🔍 Search
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FILTERS -->
+
+    <section class="filters-section">
+
+        <div class="filters">
+
+
+            <select id="genderFilter">
+
+                <option value="all">
+                    PG For: Everyone
+                </option>
+
+                <option value="boys">
+                    Boys
+                </option>
+
+                <option value="girls">
+                    Girls
+                </option>
+
+            </select>
+
+
+            <select id="roomFilter">
+
+                <option value="all">
+                    Room Type
+                </option>
+
+                <option value="single">
+                    Single
+                </option>
+
+                <option value="double">
+                    Double Sharing
+                </option>
+
+                <option value="triple">
+                    Triple Sharing
+                </option>
+
+            </select>
+
+
+            <select id="rentFilter">
+
+                <option value="all">
+                    Monthly Rent
+                </option>
+
+                <option value="7000">
+                    Under ₹7,000
+                </option>
+
+                <option value="10000">
+                    ₹7,000 - ₹10,000
+                </option>
+
+                <option value="15000">
+                    ₹10,000 - ₹15,000
+                </option>
+
+                <option value="15001">
+                    Above ₹15,000
+                </option>
+
+            </select>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- PG LISTINGS -->
+
+    <main id="pgs">
+
+        <div class="section-heading">
+
+            <p>
+                EXPLORE
+            </p>
+
+
+            <h2>
+                Popular PGs in Bangalore
+            </h2>
+
+        </div>
+
+
+        <div
+            id="pgContainer"
+            class="pg-grid"
+        >
+
+        </div>
+
+    </main>
+
+
+    <!-- ABOUT -->
+
+    <section
+        id="about"
+        class="about"
+    >
+
+        <h2>
+            Why Bangalore PG Finder?
+        </h2>
+
+
+        <p>
+            Find PG accommodation based on your preferred
+            location, budget, room type and facilities.
+        </p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Bangalore PG Finder
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
